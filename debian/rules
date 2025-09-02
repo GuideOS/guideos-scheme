@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+PACKAGE := guideos-scheme
+
+%:
+	dh $@
+
+override_dh_install:
+	# Erstellen der notwendigen Verzeichnisse
+	mkdir -p debian/$(PACKAGE)/usr/share/doc/$(PACKAGE)
+
+	# Kopieren der Dateien
+	cp LICENSE debian/$(PACKAGE)/usr/share/doc/$(PACKAGE)/LICENSE
+	chmod +x debian/postinst
+	chmod +x debian/preinst
+
+
+	dh_install

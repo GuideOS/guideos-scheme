@@ -1,0 +1,51 @@
+#!/bin/bash
+set -e
+
+# Liste der Pakete, die installiert werden sollen
+PACKAGES=(
+guideos-adblocker-tool
+guideos-azure-ttk
+guideos-browser-mail-backup
+guideos-data-vault
+guideos-energy-tool
+guideos-firewall-spice
+guideos-info-tool
+guideos-media-converter
+guideos-nvidia-tools
+guideos-shutdown-tool
+guideos-snap-installer
+guideos-snapshot-manager
+guideos-stop-tool
+guideos-sys-mods
+guideos-ticket-tool
+guideos-tray-spice
+guideos-update-notify
+guideos-updater
+guideos-version
+guideos-wallpapers
+guideos-wex-icons
+guideos-whitesur-theme
+mintstick
+mint-themes
+plymouth-theme-guideos
+primo-di-tutto
+white-sur-icon-theme
+yaru-theme-gtk
+)
+
+# Funktion zum Installieren eines Pakets, falls nicht vorhanden
+install_package() {
+  if ! dpkg -s "$1" >/dev/null 2>&1; then
+    echo "Installiere $1 ..."
+    apt-get install -y "$1"
+  else
+    echo "$1 ist bereits installiert."
+  fi
+}
+
+# Pakete installieren
+for pkg in "${PACKAGES[@]}"; do
+  install_package "$pkg"
+done
+
+exit 0
